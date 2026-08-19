@@ -26,8 +26,13 @@ function toUnits(children) {
       } else if (Array.isArray(node)) {
         walk(node)
       } else if (node.type) {
-        // 元素 / 组件 vnode → 整体作为一个动画单元
-        units.push({ kind: 'node', value: node })
+        if (typeof node.type === 'symbol') {
+          // 文本 vnode（纯文本 / 插值文本）→ 深入 children 逐字拆分，保留逐字浮现效果
+          walk(node.children)
+        } else {
+          // 元素 / 组件 vnode → 整体作为一个动画单元
+          units.push({ kind: 'node', value: node })
+        }
       } else {
         units.push({ kind: 'space', value: String(node) })
       }
