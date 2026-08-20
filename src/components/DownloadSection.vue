@@ -46,7 +46,6 @@
                 v-if="p.img"
                 :src="p.img"
                 :alt="p.label"
-                :style="{ width: 48, height: 48 }"
               />
             </div>
             <span class="platform-label">{{ p.label }}</span>
