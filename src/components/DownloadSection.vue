@@ -59,11 +59,5 @@
 <script setup>
 import RevealOnScroll from './RevealOnScroll.vue'
 import SplitText from './SplitText.vue'
-
-const downloadPlatforms = [
-  { img: '/images/icon-win.svg', label: 'Windows', dl: '点击下载 Windows 版' },
-  { img: '/images/icon-apple.svg', label: 'Mac OS', dl: '点击下载 Mac 版' },
-  { img: '/images/icon-phone.svg', label: '手机', qr: '/images/qrcode-dl.webp' },
-  { img: '/images/icon-tablet.svg', label: '平板', qr: '/images/qrcode-dl.webp' },
-]
+import { downloadPlatforms } from '@/data/platforms'
 </script>

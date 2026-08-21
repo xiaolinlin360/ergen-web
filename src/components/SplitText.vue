@@ -1,5 +1,6 @@
 <script>
-import { h, defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
+import { h, defineComponent } from 'vue'
+import { useInView } from '@/composables/useInView'
 
 /**
  * SplitText — 把文字拆成字符，进入视口时按从左到右、从下往上的顺序逐字冒出。
@@ -52,32 +53,7 @@ export default defineComponent({
     charClassName: { type: String, default: '' },
   },
   setup(props, { slots, attrs }) {
-    const el = ref(null)
-    const visible = ref(false)
-    let observer = null
-
-    onMounted(() => {
-      const target = el.value
-      if (!target) return
-      if (typeof IntersectionObserver === 'undefined') {
-        visible.value = true
-        return
-      }
-      observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            visible.value = true
-            observer.unobserve(target)
-          }
-        },
-        { threshold: props.amount }
-      )
-      observer.observe(target)
-    })
-
-    onBeforeUnmount(() => {
-      if (observer) observer.disconnect()
-    })
+    const { el, inView } = useInView({ amount: props.amount, once: true })
 
     return () => {
       const units = toUnits(slots.default ? slots.default() : [])
@@ -90,8 +66,8 @@ export default defineComponent({
         order += 1
         const style = {
           display: 'inline-block',
-          opacity: visible.value ? 1 : 0,
-          transform: visible.value ? 'translateY(0)' : 'translateY(0.5em)',
+          opacity: inView.value ? 1 : 0,
+          transform: inView.value ? 'translateY(0)' : 'translateY(0.5em)',
           transition: `opacity 0.7s var(--ease-out) ${delay}s, transform 0.7s var(--ease-out) ${delay}s`,
         }
         return h(

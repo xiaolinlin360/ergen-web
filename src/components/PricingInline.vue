@@ -35,20 +35,14 @@
               <p :style="{ margin: '0 0 4px' }">✓ AI 定制餐单</p>
               <p :style="{ margin: 0 }">✓ 热链配送到手</p>
             </div>
-            <div class="download-btn-group" :style="{ marginTop: 'auto', display: 'flex', flexDirection: 'column' }">
-              <a
-                href="https://github.com/xiaolinlin360/.github.io/releases/download/%E6%8A%98%E8%80%B3%E6%A0%B9%E5%81%A5%E5%BA%B7%E9%A4%90v0.0.1/app-debug.apk"
-                target="_blank"
-                rel="noreferrer"
-                :style="ctaStyle"
-              >
-                {{ plan.cta }}
-              </a>
-              <div class="download-qr-pop">
-                <img src="/images/qrcode.webp" alt="扫码下载" />
-                <span>手机扫码下载</span>
-              </div>
-            </div>
+            <DownloadButton
+              :platform="plan.platform || 'android'"
+              variant="pricing"
+              :show-qr="true"
+              :label="plan.cta"
+              :custom-style="ctaStyle"
+              class="price-cta-wrap"
+            />
           </article>
         </RevealOnScroll>
       </div>
@@ -57,15 +51,10 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
 import RevealOnScroll from './RevealOnScroll.vue'
 import SplitText from './SplitText.vue'
-
-const pricingPlans = [
-  { name: '3天尝鲜', price: 228, per: '≈¥38/餐', spec: '3天·6餐', cta: '试3天' },
-  { name: '7天周计划', price: 476, per: '≈¥34/餐', spec: '7天·14餐', cta: '最划算', hot: true },
-  { name: '28天月计划', price: 1792, per: '≈¥32/餐', spec: '28天·56餐', cta: '深度定制' },
-]
+import DownloadButton from './DownloadButton.vue'
+import { pricingPlans } from '@/data/pricing'
 
 const cardStyle = (plan) => ({
   display: 'flex',
@@ -81,7 +70,7 @@ const cardStyle = (plan) => ({
   transition: 'transform 220ms ease',
 })
 
-const ctaStyle = reactive({
+const ctaStyle = {
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -95,5 +84,14 @@ const ctaStyle = reactive({
   fontSize: '16px',
   textDecoration: 'none',
   boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.6), 0 16px 38px rgba(5,150,105,0.3)',
-})
+}
 </script>
+
+<style scoped>
+/* pricing variant：下载按钮容器贴到卡片底部 */
+.price-cta-wrap :deep(.download-btn-group) {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+}
+</style>

@@ -72,12 +72,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-
-const steps = [
-  { no: '01', title: '填数据', desc: '性别、年龄、身高、体重、活动量——填一次，有变化才改。', image: '/images/dialog-1.webp' },
-  { no: '02', title: '小折配餐', desc: '匹配偏好，确认执行，不用算，不用选，不用纠结。', image: '/images/dialog-2.webp' },
-  { no: '03', title: '热链送达', desc: '每日现做，准时送达，入口新鲜。', image: '/images/dialog-3.webp' },
-]
+import { steps } from '@/data/steps'
 
 const activeStep = ref(0)
 const blockRefs = ref([])

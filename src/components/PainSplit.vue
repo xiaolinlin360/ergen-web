@@ -1,7 +1,7 @@
 <template>
   <div
     class="pain-split"
-    ref="wrapRef"
+    ref="el"
     @mouseenter="paused = true"
     @mouseleave="paused = false"
   >
@@ -35,50 +35,38 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-
-const painPoints = [
-  { keyword: '外卖重油重盐', tag: '饮食困境', desc: '吃完心里难受，罪恶感爆棚', image: '/images/pain-takeout.webp' },
-  { keyword: '自己做费时费力', tag: '时间成本', desc: '买菜洗切炒刷碗，没时间也没精力', image: '/images/pain-headache.webp' },
-  { keyword: '减脂餐难吃', tag: '恶性循环', desc: '坚持不过第三天，最后还是炸鸡奶茶兜底', image: '/images/pain-friedchicken.webp' },
-]
+import { useInView, usePrefersReducedMotion } from '@/composables/useInView'
+import { painPoints } from '@/data/pain'
 
 const activeImg = ref(0)
 const direction = ref(1) /* 1=向下转入, -1=向上转出 */
 const paused = ref(false)
-const inView = ref(true)
-const wrapRef = ref(null)
 
-let io = null
-let timer = null
+const reduced = usePrefersReducedMotion()
+
+/* once: false → 进出视口都更新 inView，离开时停轮播 */
+const { el, inView } = useInView({
+  amount: 0.2,
+  once: false,
+})
 
 const switchTo = (i) => {
   direction.value = i > activeImg.value ? 1 : -1
   activeImg.value = i
 }
 
-onMounted(() => {
-  const el = wrapRef.value
-  if (!el || typeof IntersectionObserver === 'undefined') return
-  io = new IntersectionObserver(
-    ([entry]) => { inView.value = entry.isIntersecting },
-    { threshold: 0.2 }
-  )
-  io.observe(el)
+let timer = null
 
+onMounted(() => {
   /* 自动轮播：3.5s 切一张，鼠标悬停/减动偏好/不在视口时暂停 */
-  const prefersReduced =
-    typeof window !== 'undefined' &&
-    window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
   timer = setInterval(() => {
-    if (paused.value || !inView.value) return
-    if (prefersReduced) return
+    if (paused.value || !inView.value || reduced.value) return
     direction.value = 1
     activeImg.value = (activeImg.value + 1) % painPoints.length
   }, 3500)
 })
 
 onUnmounted(() => {
-  if (io) io.disconnect()
   if (timer) clearInterval(timer)
 })
 </script>

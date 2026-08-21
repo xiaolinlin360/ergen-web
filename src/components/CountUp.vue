@@ -5,7 +5,8 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onBeforeUnmount } from 'vue'
+import { useInView, usePrefersReducedMotion } from '@/composables/useInView'
 
 /**
  * CountUp — 进入视口时数字从 0 滚动到目标值
@@ -17,54 +18,39 @@ const props = defineProps({
   duration: { type: Number, default: 1600 },
 })
 
-const el = ref(null)
 const display = ref(0)
-
 let raf = 0
 let startTime = 0
 let started = false
-let io = null
 
-onMounted(() => {
-  const target = el.value
-  if (!target) return
+const reduced = usePrefersReducedMotion()
 
-  const prefersReduced =
-    typeof window !== 'undefined' &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  if (prefersReduced) {
+const tick = (now) => {
+  if (!startTime) startTime = now
+  const t = Math.min((now - startTime) / props.duration, 1)
+  const eased = 1 - Math.pow(1 - t, 3) // easeOutCubic
+  display.value = props.value * eased
+  if (t < 1) raf = requestAnimationFrame(tick)
+  else display.value = props.value
+}
+
+const startAnimation = () => {
+  if (started) return
+  started = true
+  if (reduced.value) {
     display.value = props.value
     return
   }
+  raf = requestAnimationFrame(tick)
+}
 
-  const tick = (now) => {
-    if (!startTime) startTime = now
-    const t = Math.min((now - startTime) / props.duration, 1)
-    const eased = 1 - Math.pow(1 - t, 3) // easeOutCubic
-    display.value = props.value * eased
-    if (t < 1) raf = requestAnimationFrame(tick)
-    else display.value = props.value
-  }
-
-  io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && !started) {
-          started = true
-          raf = requestAnimationFrame(tick)
-          io.disconnect()
-        }
-      })
-    },
-    { threshold: 0.4 }
-  )
-  io.observe(target)
+const { el } = useInView({
+  amount: 0.4,
+  once: true,
+  onEnter: startAnimation,
 })
 
-onUnmounted(() => {
-  if (io) io.disconnect()
-  cancelAnimationFrame(raf)
-})
+onBeforeUnmount(() => cancelAnimationFrame(raf))
 
 const shown = computed(() =>
   props.decimals > 0 ? display.value.toFixed(props.decimals) : Math.round(display.value)
