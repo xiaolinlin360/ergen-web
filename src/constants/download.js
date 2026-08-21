@@ -6,8 +6,7 @@
  */
 export const DOWNLOAD_URLS = {
   /** Android APK（GitHub Releases 托管） */
-  android:
-    'https://github.com/xiaolinlin360/.github.io/releases/download/%E6%8A%98%E8%80%B3%E6%A0%B9%E5%81%A5%E5%BA%B7%E9%A4%90v0.0.1/app-debug.apk',
+  android: 'https://github.com/xiaolinlin360/.github.io/releases/download/ergen/app-v0.0.x.apk',
   /** iOS —— 待上架，暂用占位 */
   ios: '#',
   /** Windows —— 待发布 */
