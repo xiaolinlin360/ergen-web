@@ -35,6 +35,6 @@
 </template>
 
 <script setup>
-import RevealOnScroll from './RevealOnScroll.vue'
+import RevealOnScroll from '@/components/RevealOnScroll.vue'
 import { ingredients } from '@/data/foods'
 </script>

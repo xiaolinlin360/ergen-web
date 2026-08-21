@@ -10,12 +10,12 @@
 </template>
 
 <script setup>
-import HotChainHero from '@/components/HotChainHero.vue'
-import PainSection from '@/components/PainSection.vue'
-import AnswerSection from '@/components/AnswerSection.vue'
-import StepsSection from '@/components/StepsSection.vue'
-import PricingInline from '@/components/PricingInline.vue'
-import TrustSection from '@/components/TrustSection.vue'
-import FaqSection from '@/components/FaqSection.vue'
-import DownloadSection from '@/components/DownloadSection.vue'
+import HotChainHero from '@/components/sections/HotChainHero.vue'
+import PainSection from '@/components/sections/PainSection.vue'
+import AnswerSection from '@/components/sections/AnswerSection.vue'
+import StepsSection from '@/components/sections/StepsSection.vue'
+import PricingInline from '@/components/sections/PricingInline.vue'
+import TrustSection from '@/components/sections/TrustSection.vue'
+import FaqSection from '@/components/sections/FaqSection.vue'
+import DownloadSection from '@/components/sections/DownloadSection.vue'
 </script>

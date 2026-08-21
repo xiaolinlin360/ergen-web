@@ -51,9 +51,9 @@
 </template>
 
 <script setup>
-import RevealOnScroll from './RevealOnScroll.vue'
-import SplitText from './SplitText.vue'
-import DownloadButton from './DownloadButton.vue'
+import RevealOnScroll from '@/components/RevealOnScroll.vue'
+import SplitText from '@/components/SplitText.vue'
+import DownloadButton from '@/components/DownloadButton.vue'
 import { pricingPlans } from '@/data/pricing'
 
 const cardStyle = (plan) => ({

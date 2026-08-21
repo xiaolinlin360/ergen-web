@@ -25,8 +25,8 @@
 </template>
 
 <script setup>
-import RevealOnScroll from './RevealOnScroll.vue'
-import SplitText from './SplitText.vue'
-import CountUp from './CountUp.vue'
+import RevealOnScroll from '@/components/RevealOnScroll.vue'
+import SplitText from '@/components/SplitText.vue'
+import CountUp from '@/components/CountUp.vue'
 import { trustStats } from '@/data/trust'
 </script>

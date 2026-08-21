@@ -46,8 +46,8 @@
 </template>
 
 <script setup>
-import RevealOnScroll from './RevealOnScroll.vue'
-import DownloadButton from './DownloadButton.vue'
+import RevealOnScroll from '@/components/RevealOnScroll.vue'
+import DownloadButton from '@/components/DownloadButton.vue'
 import { IMAGES } from '@/data/images'
 
 const titleStyle = {
