@@ -1,0 +1,210 @@
+/* 法律/信息页样式 —— 薄荷绿族基底 + pandoc 表格适配
+   6 个法律页（changelog/help/service/copyright/privacy/terms）共用。
+   刻意不套营销页的 cream token：法律文档需要正式、克制的排版。 */
+
+/* 返回首页按钮 —— Company 页与法律页共用（由 DefaultLayout 渲染） */
+.info-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 0 24px;
+  padding: 8px 16px;
+  background: #ffffff;
+  color: #2b1f14;
+  border: 1px solid rgba(43, 31, 20, 0.12);
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  transition: background 0.2s ease;
+}
+
+.info-back-btn:hover {
+  background: #f0fdf7;
+}
+
+.legal-page {
+  /* 背景相对视口固定：渐变铺满视口，内容滑动时背景不动。
+     用 background-attachment: fixed + 视口尺寸渐变，
+     避免长页把渐变拉伸稀释，也避免循环接缝分层。 */
+  background: linear-gradient(135deg, #d1fae5 0%, #ecfdf5 45%, #f0fdf7 100%);
+  background-attachment: fixed;
+  background-size: 100vw 100vh;
+  background-position: center center;
+  color: #2b1f14;
+  line-height: 1.8;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  padding: 48px 20px 80px;
+}
+
+.legal-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.legal-hero {
+  margin-bottom: 32px;
+}
+
+.legal-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: #065f46;
+}
+
+.legal-updated {
+  color: #77675a;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* —— 正文：v-html 注入的元素，用全局选择器（非 scoped）—— */
+.legal-body h1 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 36px 0 12px;
+  color: #065f46;
+}
+
+.legal-body h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 28px 0 10px;
+  color: #065f46;
+}
+
+.legal-body h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 22px 0 8px;
+  color: #2b1f14;
+}
+
+.legal-body p,
+.legal-body li {
+  font-size: 15px;
+  color: #52443a;
+  margin: 0.6em 0;
+}
+
+.legal-body ul,
+.legal-body ol {
+  padding-left: 1.7em;
+  margin: 0.8em 0;
+}
+
+.legal-body a {
+  color: #059669;
+}
+
+.legal-body a:visited {
+  color: #059669;
+}
+
+.legal-body blockquote {
+  margin: 1em 0 1em 1.7em;
+  padding-left: 1em;
+  border-left: 2px solid #a7f3d0;
+  color: #52443a;
+}
+
+/* 版本更新页的版本徽标 */
+.legal-body .ver {
+  display: inline-block;
+  background: #065f46;
+  color: #fff;
+  border-radius: 999px;
+  padding: 2px 12px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.legal-body .date {
+  color: #77675a;
+  font-size: 13px;
+  margin: 8px 0 12px;
+}
+
+/* 帮助中心的手风琴 */
+.legal-body details {
+  border-bottom: 1px solid rgba(43, 31, 20, 0.1);
+  padding: 16px 0;
+}
+
+.legal-body summary {
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 16px;
+  color: #2b1f14;
+}
+
+.legal-body details p {
+  margin: 10px 0 0;
+}
+
+/* 版权投诉的邮箱卡片 */
+.legal-body .mail {
+  background: #fff;
+  border: 1px solid rgba(43, 31, 20, 0.12);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-top: 12px;
+}
+
+/* —— pandoc 族：隐私政策/用户协议的表格 —— */
+.legal-body table {
+  margin: 1em 0;
+  border-collapse: collapse;
+  width: 100%;
+  overflow-x: auto;
+  display: block;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.legal-body table caption {
+  margin-bottom: 0.75em;
+  color: #52443a;
+}
+
+.legal-body tbody {
+  margin-top: 0.5em;
+  border-top: 1px solid #a7f3d0;
+  border-bottom: 1px solid #a7f3d0;
+}
+
+.legal-body th {
+  border-top: 1px solid #a7f3d0;
+  padding: 0.4em 0.6em;
+  text-align: left;
+  font-weight: 600;
+  color: #065f46;
+  background: #ecfdf5;
+}
+
+.legal-body td {
+  padding: 0.3em 0.6em;
+  border-top: 1px solid rgba(167, 243, 208, 0.5);
+  color: #52443a;
+  font-size: 14px;
+}
+
+.legal-body code {
+  font-family: Menlo, Monaco, Consolas, monospace;
+  font-size: 85%;
+  background: rgba(167, 243, 208, 0.3);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+
+.legal-body hr {
+  background-color: #a7f3d0;
+  border: none;
+  height: 1px;
+  margin: 1.5em 0;
+}
+
+/* pandoc 的 <header id="title-block-header"> 已在 data 抽取时移除，这里防御性隐藏 */
+.legal-body #title-block-header {
+  display: none;
+}

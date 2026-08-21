@@ -1,14 +1,14 @@
 <template>
-  <main class="site-shell" :class="{ 'company-page': isCompany }">
+  <main class="site-shell" :class="{ 'info-page': !isHome }">
     <div class="grain" aria-hidden="true" />
-    <div v-if="!isCompany" class="global-blobs" aria-hidden="true">
+    <div v-if="isHome" class="global-blobs" aria-hidden="true">
       <span class="s-blob s-blob-1" />
       <span class="s-blob s-blob-2" />
       <span class="s-blob s-blob-3" />
     </div>
 
     <SiteNav
-      v-if="!isCompany"
+      v-if="isHome"
       :items="navItems"
       :active-id="activeSection"
       :show-download="true"
@@ -16,9 +16,9 @@
     />
 
     <router-link
-      v-if="isCompany"
+      v-if="!isHome"
       to="/"
-      class="company-back-btn"
+      class="info-back-btn"
       aria-label="返回首页"
     >
       <svg
@@ -52,19 +52,15 @@ import { useActiveSection } from '@/composables/useActiveSection'
 import { navItems } from '@/data/nav'
 
 const route = useRoute()
-const isCompany = computed(() => route.name === 'company')
+// 只有首页是营销长页（带导航+背景装饰）；company 和法律页都是独立信息页（返回首页按钮）
+const isHome = computed(() => route.name === 'home')
 
-const sectionIds = computed(() =>
-  isCompany.value ? [] : navItems.map((i) => i.id)
-)
+const sectionIds = computed(() => (isHome.value ? navItems.map((i) => i.id) : []))
 
-const { activeSection, scrollTo, goHome } = useActiveSection(
-  () => sectionIds.value,
-  {
-    rootMargin: '-8% 0px -8% 0px',
-    topThreshold: 120,
-  }
-)
+const { activeSection, scrollTo, goHome } = useActiveSection(() => sectionIds.value, {
+  rootMargin: '-8% 0px -8% 0px',
+  topThreshold: 120,
+})
 
 const handleNavigate = (id) => {
   if (id === '') {

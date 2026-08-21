@@ -5,9 +5,13 @@
       <div class="footer-new-links">
         <router-link to="/company">公司简介</router-link>
         <span class="footer-new-sep">|</span>
-        <a href="/隐私政策.html" target="_blank" rel="noopener">隐私政策</a>
+        <router-link to="/privacy">隐私政策</router-link>
         <span class="footer-new-sep">|</span>
-        <a href="/用户协议.html" target="_blank" rel="noopener">用户协议</a>
+        <router-link to="/terms">用户协议</router-link>
+        <span class="footer-new-sep">|</span>
+        <router-link to="/help">帮助中心</router-link>
+        <span class="footer-new-sep">|</span>
+        <router-link to="/changelog">版本更新</router-link>
       </div>
       <!-- 下层:版权区 -->
       <div class="footer-new-copy">
