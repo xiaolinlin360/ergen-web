@@ -13,7 +13,7 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-import '@/styles/sections/legal.css'
+// legal.css 已统一在 main.js 中加载
 
 defineProps({
   doc: { type: Object, required: true },

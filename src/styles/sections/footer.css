@@ -1,0 +1,19 @@
+/* ================================================================
+   footer.css —— 页脚(SiteFooter)
+   ================================================================ */
+
+.site-footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- 新页脚 ---- */
+.site-footer { }
+.footer-new { width: 100%; padding: 24px 20px; text-align: center; }
+.footer-new-links { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0; margin-bottom: 14px; }
+.footer-new-links a { color: #374151; font-size: 15px; text-decoration: none; transition: color 0.15s; }
+.footer-new-links a:hover { color: var(--ember-ink); }
+.footer-new-sep { color: #d1d5db; font-size: 14px; margin: 0 10px; user-select: none; }
+.footer-new-copy { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px; color: #9ca3af; font-size: 13px; }
+.footer-new-copy a { color: #9ca3af; font-size: 13px; text-decoration: none; transition: color 0.15s; }
+.footer-new-copy a:hover { color: var(--ember-ink); }

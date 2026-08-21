@@ -1,0 +1,152 @@
+/* ================================================================
+   trust.css —— 信任背书区(TrustSection)
+   ================================================================ */
+
+.story-trust-inner {
+  display: flex;
+  flex-direction: column;
+}
+
+.trust-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.trust-head h2 {
+  margin: 20px 0 0;
+  font-size: var(--fs-h2);
+  font-weight: 680;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.trust-head h2 span {
+  color: #000;
+}
+
+/* ── TrustStrip：横向数据条 ── */
+.trust-sub {
+  margin: 20px auto 0;
+  text-align: center;
+  color: #000;
+  font-size: var(--fs-lede);
+  font-weight: 400;
+}
+
+.trust-strip {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0;
+  margin: 52px auto 0;
+  max-width: 1020px;
+}
+
+.trust-strip-item {
+  flex: 1;
+  text-align: left;
+  padding: 8px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.trust-strip-item strong {
+  display: block;
+  font-size: clamp(48px, 5vw, 80px);
+  font-weight: 680;
+  line-height: 1;
+  color: var(--ink-cream);
+  white-space: nowrap;
+}
+
+.trust-strip-item:nth-child(1) { padding-top: 0; }
+.trust-strip-item:nth-child(3) { padding-top: 80px; }
+.trust-strip-item:nth-child(5) { padding-top: 160px; }
+.trust-strip-item:nth-child(7) { padding-top: 240px; }
+
+
+.trust-strip-item .trust-strip-label {
+  display: block;
+  margin-top: 10px;
+  color: var(--ink-cream);
+  font-size: clamp(16px, 1.1vw, 20px);
+  font-weight: 600;
+}
+
+.trust-strip-item .trust-strip-desc {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted-cream);
+  font-size: var(--fs-subtitle);
+  line-height: 1.5;
+}
+
+.trust-strip-divider {
+  display: none;
+}
+
+/* ── 深色背景变体(TrustSection 实际使用) ── */
+.trust-dark {
+  background: var(--cream);
+  background-attachment: fixed;
+  padding: var(--section-gap) 0;
+}
+
+.trust-dark .trust-head h2 {
+  color: var(--ink-cream);
+}
+
+.trust-dark .trust-head h2 span {
+  color: var(--ink-cream);
+}
+
+.trust-dark .trust-sub {
+  color: #000;
+}
+
+.trust-dark .trust-strip-item strong {
+  color: var(--ink-cream);
+}
+
+.trust-dark .trust-strip-label {
+  color: #000;
+}
+
+.trust-dark .trust-strip-desc {
+  color: #000;
+}
+
+/* 浅色薄荷背景下标题不加绿光，避免发灰发糊 */
+.trust-dark .trust-head h2 {
+  text-shadow: none;
+}
+
+/* ── 响应式 ── */
+@media (max-width: 760px) {
+  .trust-head h2 {
+    font-size: clamp(30px, 8vw, 42px);
+  }
+
+  .trust-strip {
+    flex-wrap: wrap;
+  }
+
+  .trust-strip-item {
+    flex: 1 1 40%;
+  }
+
+  .trust-strip-item:nth-child(1),
+  .trust-strip-item:nth-child(3),
+  .trust-strip-item:nth-child(5),
+  .trust-strip-item:nth-child(7) {
+    margin-top: 12px;
+  }
+
+  .trust-strip-divider {
+    height: 60px;
+  }
+}

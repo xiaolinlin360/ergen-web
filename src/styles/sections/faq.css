@@ -1,0 +1,156 @@
+/* ================================================================
+   faq.css —— 常见问题区(FaqSection)
+   ================================================================ */
+
+.faq {
+  display: block;
+  padding: var(--section-gap) 0;
+}
+
+.faq-inner {
+  width: min(1180px, calc(100% - 80px));
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* 左右分栏：左侧标题区 + 右侧手风琴 */
+.faq-split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 64px;
+  align-items: start;
+}
+
+.faq-head {
+  text-align: left;
+  position: relative;
+}
+
+.faq-title {
+  margin: 0;
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  color: var(--ink-cream);
+}
+
+.faq-sub {
+  max-width: none;
+  margin: 20px 0 0;
+  color: #000;
+  font-size: var(--fs-lede);
+  line-height: 1.85;
+  font-weight: 400;
+  white-space: nowrap;
+  text-align: center;
+  transform: translateX(-80px);
+}
+
+/* 右侧垂直手风琴 */
+.faq-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+/* FAQ 卡片 */
+.faq-item {
+  background: #ffffff;
+  border: 1px solid rgba(43, 31, 20, 0.08);
+  border-radius: var(--r-lg);
+  box-shadow: 0 8px 28px rgba(43, 31, 20, 0.04);
+  overflow: hidden;
+  transition: border-color 0.25s var(--ease-std), box-shadow 0.25s var(--ease-std);
+}
+
+.faq-item.is-open,
+.faq-item:hover {
+  border-color: rgba(5, 150, 105, 0.3);
+  box-shadow: 0 12px 36px rgba(43, 31, 20, 0.07);
+}
+
+.faq-q-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: clamp(20px, 2vw, 32px) clamp(18px, 2vw, 34px);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+}
+
+.faq-q {
+  font-size: clamp(18px, 1.25vw, 22px);
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--ink-cream);
+  transition: color 0.2s ease;
+}
+
+.faq-item:hover .faq-q,
+.faq-item.is-open .faq-q {
+  color: var(--ember-ink);
+}
+
+.faq-chevron {
+  flex: none;
+  color: var(--ember-ink);
+  transition: transform 0.3s ease;
+}
+
+.faq-item.is-open .faq-chevron {
+  transform: rotate(180deg);
+}
+
+.faq-a-wrap {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.faq-item.is-open .faq-a-wrap {
+  max-height: 560px;
+}
+
+.faq-a {
+  display: block;
+  margin: 0;
+  padding: 0 34px 32px;
+  color: #000;
+  font-size: var(--fs-sm);
+  font-weight: 380;
+  line-height: 1.8;
+}
+
+/* FAQ 条目:玻璃分隔线风格(覆盖上面的默认边框色) */
+.faq-item {
+  border-color: rgba(255, 255, 255, 0.58);
+}
+
+/* ── 响应式 ── */
+@media (max-width: 900px) {
+  .faq-inner {
+    width: min(1100px, calc(100% - 32px));
+    padding: 56px 0 72px;
+  }
+
+  .faq-split {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .faq-head {
+    position: relative;
+    text-align: left;
+    margin-bottom: 0;
+  }
+}

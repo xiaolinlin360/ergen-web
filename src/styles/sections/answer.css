@@ -1,0 +1,160 @@
+/* ================================================================
+   answer.css —— 食材溯源/我们的答案区(AnswerSection)
+   ================================================================ */
+
+.story-answer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0;
+  width: min(1500px, calc(100% - 24px));
+}
+
+/* ── 食材供应链：标题居中 + 4 张卡片横向排列 ── */
+.ingredient-head {
+  max-width: none;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ingredient-head h2 {
+  margin: 0;
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: 0;
+  text-align: center;
+  font-family: var(--font-sans);
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.ingredient-head p {
+  max-width: 680px;
+  margin: 20px auto 0;
+  color: #000;
+  font-size: var(--fs-lede);
+  line-height: 1.85;
+  font-weight: 400;
+}
+
+/* ── 食材供应链：2×2 网格 · 左右分割卡片 ── */
+.ingredient-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  width: 100%;
+  max-width: 1180px;
+  margin-top: 48px;
+}
+
+.ingredient-card.split {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  text-align: left;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 26px;
+  background: #ffffff;
+  border: 1px solid rgba(43, 31, 20, 0.06);
+  box-shadow: 0 10px 30px rgba(43, 31, 20, 0.06);
+  transition: transform 0.25s var(--ease-std), box-shadow 0.25s var(--ease-std);
+}
+
+.ingredient-card.split:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(43, 31, 20, 0.12);
+}
+
+/* 左侧食材特写图 */
+.ingredient-img {
+  flex: 0 0 44%;
+  align-self: stretch;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.ingredient-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease-out);
+}
+
+.ingredient-card.split:hover .ingredient-img img {
+  transform: scale(1.06);
+}
+
+/* 右侧文本区 */
+.ingredient-body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(20px, 2.2vw, 32px) clamp(19px, 2.2vw, 34px);
+  min-width: 0;
+}
+
+.ingredient-name {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 700;
+  color: #000;
+  letter-spacing: 0.01em;
+}
+
+.ingredient-desc {
+  display: block;
+  margin: 9px 0 0;
+  font-size: 16px;
+  color: var(--muted-cream);
+}
+
+.ingredient-nutri {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px dashed rgba(43, 31, 20, 0.12);
+}
+
+.ingredient-nutri-label {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #000000;
+  margin-bottom: 14px;
+}
+
+.ingredient-nutri ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ingredient-nutri li,
+.ingredient-nutri p {
+  font-size: 19px;
+  line-height: 1.95;
+  color: var(--ink-cream);
+  margin: 0;
+}
+
+/* 超小屏：单列堆叠，图片在上、文字在下 */
+@media (max-width: 720px) {
+  .ingredient-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 460px;
+  }
+  .ingredient-card.split {
+    flex-direction: column;
+  }
+  .ingredient-img {
+    flex: none;
+    aspect-ratio: 16 / 9;
+  }
+  .ingredient-body {
+    padding: 20px;
+  }
+}

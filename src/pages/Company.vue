@@ -51,7 +51,7 @@
 </template>
 
 <script setup>
-import '@/styles/sections/legal.css'
+// legal.css 已统一在 main.js 中加载
 </script>
 
 <style scoped>

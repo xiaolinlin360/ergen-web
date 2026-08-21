@@ -1,0 +1,245 @@
+/* ================================================================
+   steps.css —— 使用流程区(StepsSection)
+   桌面:左栏滚动驱动 + 右栏 sticky 手机图
+   移动:每步下方成对显示手机图
+   ================================================================ */
+
+/* ===== 滚动驱动 sticky 布局（桌面端） ===== */
+.steps-scroll-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.steps-scroll-left {
+  display: flex;
+  flex-direction: column;
+  /* 末尾留白：让最后一步(03)的文字块能滚到屏幕正中才结束，
+     确保双向滚动时 03 都能完整显示，且不影响 01/02/03 之间的间距 */
+  padding-bottom: 80px;
+}
+
+.steps-scroll-block {
+  padding: 56px 0;
+  opacity: 0.45;
+  transition: opacity 0.3s var(--ease-std);
+}
+
+/* 数字与标题横向并排 */
+.steps-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.steps-scroll-block.is-active {
+  opacity: 1;
+}
+
+/* 右栏：钉住，滚动时图随左侧进度切换 */
+.steps-sticky-right {
+  position: sticky;
+  /* 顶部留出固定导航栏(92px)余量，避免手机图上半部分被遮挡 */
+  top: 150px;
+  display: flex;
+  justify-content: center;
+}
+
+.steps-sticky-phone {
+  position: relative;
+  width: 300px;
+  height: 620px;
+  border-radius: 28px;
+  overflow: hidden;
+}
+
+.steps-sticky-phone .steps-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-std);
+}
+
+.steps-sticky-phone .steps-slide.is-active {
+  opacity: 1;
+}
+
+.steps-sticky-phone .steps-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 移动端每步下方图片：默认隐藏（桌面用 sticky） */
+.steps-mobile-phone {
+  display: none;
+}
+
+.steps-mobile-phone img {
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+  border-radius: 20px;
+  object-fit: contain;
+}
+
+/* 通用 steps-slide(供右栏切换图使用) */
+.steps-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out);
+}
+
+.steps-slide.is-active {
+  opacity: 1;
+}
+
+.steps-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── 新版三步流程：左文右卡，等高对齐 ── */
+.steps-new-layout {
+  width: min(1180px, calc(100% - 80px)) !important;
+  padding: 64px 0 !important;
+}
+
+.steps-new-head {
+  text-align: center;
+  margin-bottom: 52px;
+}
+
+.steps-new-head h2 {
+  font-size: var(--fs-h2);
+  font-weight: 680;
+  margin: 0;
+}
+
+.steps-new-sub {
+  max-width: none;
+  margin: 20px auto 0;
+  color: #000;
+  font-size: var(--fs-lede);
+  line-height: 1.85;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.steps-new-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: stretch;
+}
+
+/* 左栏：三步流程 */
+.steps-new-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.steps-new-item {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex: 1;
+  padding: 12px 0;
+}
+
+.steps-new-no {
+  font-size: clamp(56px, 6vw, 80px);
+  font-weight: 680;
+  color: rgba(5, 150, 105, 0.28);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 100px;
+  text-align: left;
+  transition: color 0.2s var(--ease-std);
+}
+
+.steps-new-text h3 {
+  margin: 0;
+  font-size: clamp(40px, 4.5vw, 60px);
+  font-weight: 680;
+  color: var(--ink-cream);
+  line-height: 1;
+}
+
+.steps-new-text p {
+  margin: 8px 0 0;
+  font-size: clamp(16px, 1.1vw, 20px);
+  line-height: 1.7;
+  color: #000;
+  line-height: 1.65;
+}
+
+/* 右栏：切换展示对应步骤图片 */
+.steps-new-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.steps-new-item {
+  cursor: default;
+  transition: background 0.2s var(--ease-std);
+}
+.steps-new-item.is-active {
+  background: rgba(5, 150, 105, 0.06);
+  border-radius: 16px;
+  padding-left: 16px;
+  margin-left: -16px;
+  padding-right: 16px;
+  margin-right: -16px;
+}
+
+.steps-new-item.is-active .steps-new-no {
+  color: rgba(5, 150, 105, 0.42);
+}
+
+/* ── 响应式 ── */
+@media (max-width: 860px) {
+  /* 移动端：关闭 sticky，改单列 + 每步成对手机图 */
+  .steps-scroll-wrap {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .steps-sticky-right {
+    display: none;
+  }
+
+  .steps-scroll-block {
+    opacity: 1;
+    border-left: none;
+    padding: 24px 0;
+    border-top: 1px solid rgba(43, 31, 20, 0.1);
+  }
+
+  .steps-mobile-phone {
+    display: flex;
+    justify-content: center;
+    margin-top: 18px;
+  }
+
+  .steps-new-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .steps-new-no {
+    font-size: 48px;
+    width: 72px;
+  }
+
+  .steps-new-layout {
+    padding: 48px 0 !important;
+  }
+}

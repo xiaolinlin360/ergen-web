@@ -1,0 +1,93 @@
+/* ================================================================
+   Design tokens —— 全站设计令牌(颜色 / 字体 / 间距 / 缓动 / 字号)
+   必须最先 import,后续所有 section 文件依赖这些 CSS 变量。
+   ================================================================ */
+:root {
+  color: #f7f7ef;
+  background: linear-gradient(135deg, #D1FAE5 0%, #ECFDF5 45%, #F0FDF7 100%); /* 薄荷渐变底:消除加载暗闪 */
+  --font-sans:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  /* 展示字体:拉丁与数字用 Fraunces 衬线,中文优先落到系统精致宋体(有则用),
+     无则回退到无衬线,规避 Windows SimSun 的陈旧观感 */
+  --font-display:
+    "Fraunces", "Songti SC", "Source Han Serif SC", "Source Han Serif CN",
+    "Noto Serif SC", Georgia, var(--font-sans);
+  font-family: var(--font-sans);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  --panel: rgba(255, 255, 255, 0.07);
+  --panel-strong: rgba(255, 255, 255, 0.12);
+  --line: rgba(255, 255, 255, 0.14);
+  --muted: rgba(247, 247, 239, 0.68);
+  --soft: rgba(247, 247, 239, 0.42);
+  --acid: #d5ff66;
+  --mint: #8fffc2;
+  --ember: #6EE7B7; /* 浅薄荷绿(替代原暖橙) */
+  --ink: #070807;
+  /* ============ 暖白底色库 v1:以 #FBF9F1 为锚点 ============ */
+  /* 底面族:白-米-沙三档海拔 */
+  --cream: linear-gradient(135deg, #D1FAE5 0%, #ECFDF5 45%, #F0FDF7 100%); /* surface-base 全站底色:薄荷渐变(末端非纯白,避免交界亮带) */
+  --cream-card: #ffffff; /* surface-raised 卡片/悬浮面板 */
+  --cream-sunken: #ECFDF5; /* surface-sunken 分区/下沉面:薄荷浅绿 */
+  --ember-100: #D1FAE5; /* 浅薄荷绿衬底(替代原暖橙) */
+  --olive-100: #D1FAE5; /* 原橄榄浅衬底,现指向薄荷绿 */
+  /* 字色族:咖啡暖墨(与暖白底同温),对 #FBF9F1 实测对比度 */
+  --ink-cream: #2b1f14; /* 15.2:1 AAA 标题:深咖啡 */
+  --ink-body: #52443a; /* 8.9:1 AAA 正文:暖褐 */
+  --muted-cream: #77675a; /* 5.2:1 AA 辅助:浅咖 */
+  --soft-cream: #93857a; /* 3.4:1 仅限大字/装饰 */
+  --line-cream: rgba(43, 31, 20, 0.12);
+  --line-strong: rgba(43, 31, 20, 0.16);
+  --shadow-ink: rgba(43, 31, 20, 0.14); /* 全站唯一阴影色 */
+  /* 强调色:纯暖橙单色系(应品牌要求去绿,olive token 重指向暖橙保持兼容) */
+  --ember-ink: #065F46; /* 深薄荷绿文字/主强调 */
+  --ember-600: #059669; /* 中薄荷绿按钮实底/大号文字 */
+  --olive: #059669; /* 原橄榄绿,现并入中薄荷绿 */
+  --olive-700: #065F46; /* 原深绿文字,现并入深薄荷绿 */
+  /* 写死暖橙 hex 统一映射为薄荷绿 */
+  /* 功能色 */
+  --danger-600: #a93f35;
+  --danger-100: #f6e0dd;
+  --warn-700: #8a6117;
+  --warn-100: #f6e8c8;
+
+  /* ============ Design tokens · 设计系统底座 ============ */
+  /* 圆角 */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 20px;
+  --r-2xl: 28px;
+  --r-pill: 999px;
+  /* 阴影 */
+  --shadow-card: 0 18px 60px rgba(0, 0, 0, 0.38);
+  --shadow-float: 0 34px 100px rgba(0, 0, 0, 0.44);
+  --shadow-glow-acid: 0 18px 54px rgba(143, 255, 194, 0.22);
+  /* 缓动 */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* 弹性缓出:图片/位移 */
+  --ease-std: cubic-bezier(0.4, 0, 0.2, 1); /* 标准:通用过渡 */
+  /* 间距梯度(4 的倍数) */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+  /* 区块间统一垂直间距(大厂标准:相邻模块间距恒定) */
+  --section-gap: 96px;
+  /* 展示字号阶梯(P1 排版收敛引用;3 级大标题统一缩放曲线) */
+  --fs-display: clamp(64px, 7.4vw, 138px); /* Hero / 下载 主视觉 */
+  --fs-h1: clamp(46px, 5.4vw, 104px); /* 章节大标题 */
+  --fs-h2: clamp(38px, 4.4vw, 78px); /* 章节次级标题 */
+  --fs-h3: clamp(20px, 1.5vw, 26px); /* 卡片标题 */
+  --fs-lede: clamp(17px, 1.15vw, 22px); /* 引导正文 */
+  --fs-body: clamp(16px, 1.05vw, 19px); /* 正文 */
+  --fs-sm: clamp(14px, 0.95vw, 16px); /* 辅助文字 */
+  /* 全站统一副标题（区块/卡片说明文案）字号，单一数据源 */
+  --fs-subtitle: clamp(15px, 1.05vw, 19px);
+}

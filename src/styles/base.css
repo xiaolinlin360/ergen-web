@@ -1,0 +1,218 @@
+/* ================================================================
+   base.css —— 全站基础样式
+   包含:reset / 站点外壳 / 颗粒纹理 / 通用面板 / 最大宽度容器
+        / 全局光斑 / 浅色面板基类 / 焦点环 / 选区色
+        / reveal-* 入场动画 keyframes(供 RevealOnScroll 通用组件)
+        / 区块锚点 scroll-margin / 全局排版呼吸感
+   ================================================================ */
+
+/* ---------- reset ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ---------- 站点外壳 ---------- */
+.site-shell {
+  position: relative;
+  min-height: 100vh;
+  background: var(--cream);
+  background-attachment: fixed;
+}
+
+/* 胶片颗粒:统一质感 + 消除深色渐变的色带 */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.025;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+
+/* ---------- 通用面板 / 容器 ---------- */
+.section-panel {
+  position: relative;
+  overflow-x: hidden;
+}
+
+.max-frame {
+  width: min(1700px, calc(100% - 80px));
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* ---------- 全局光斑(fixed 贯穿整页) ---------- */
+.global-blobs {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.global-blobs .s-blob {
+  position: absolute;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  filter: blur(72px);
+  will-change: transform;
+}
+
+.s-blob-1 {
+  width: clamp(340px, 38vw, 620px);
+  left: -10%;
+  top: 5%;
+  background: radial-gradient(circle at 35% 35%, rgba(110, 231, 183, 0.45), rgba(110, 231, 183, 0) 68%);
+  animation: blob-drift-a 32s ease-in-out infinite alternate;
+}
+
+.s-blob-2 {
+  width: clamp(280px, 30vw, 500px);
+  right: -6%;
+  top: 55%;
+  background: radial-gradient(circle at 60% 40%, rgba(167, 243, 208, 0.38), rgba(167, 243, 208, 0) 66%);
+  animation: blob-drift-b 38s ease-in-out infinite alternate;
+}
+
+.s-blob-3 {
+  width: clamp(240px, 26vw, 440px);
+  left: 35%;
+  top: 30%;
+  background: radial-gradient(circle at 50% 50%, rgba(209, 250, 229, 0.32), rgba(209, 250, 229, 0) 70%);
+  animation: blob-drift-c 28s ease-in-out infinite alternate;
+}
+
+@keyframes blob-drift-a {
+  to {
+    transform: translate3d(7vw, 5vw, 0) scale(1.14);
+  }
+}
+
+@keyframes blob-drift-b {
+  to {
+    transform: translate3d(-6vw, 6vw, 0) scale(1.1);
+  }
+}
+
+@keyframes blob-drift-c {
+  to {
+    transform: translate3d(5vw, -5vw, 0) scale(1.18);
+  }
+}
+
+/* ---------- 浅色奶油版块基类 ---------- */
+.panel-cream {
+  color: var(--ink-cream);
+}
+
+/* ---------- 焦点环 + 选区色 ---------- */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--ember-ink);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--ember-100);
+  color: var(--ink-cream);
+}
+
+/* ---------- RevealOnScroll 通用组件的入场动画 keyframes ----------
+   组件本身用 inline style 控制触发,这些 keyframes 作为动画库储备。 */
+@keyframes reveal-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes reveal-rise {
+  from { opacity: 0; transform: translateY(48px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes reveal-slide-in {
+  from { opacity: 0; transform: translateX(80px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes reveal-scale-in {
+  from { opacity: 0; transform: scale(0.82); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes reveal-pop-up {
+  from { opacity: 0; transform: translateY(60px); }
+  65%  { opacity: 1; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- 全局排版呼吸感 ---------- */
+h2, h3 { text-wrap: balance; }
+p, .faq-a, .step-detail, .testimonial-text { text-wrap: pretty; }
+
+/* ---------- 区块锚点:导航跳转时完整展示 ---------- */
+#pain,
+#answer,
+#steps,
+#pricing,
+#trust,
+#faq {
+  scroll-margin-top: 70px;
+}
+
+/* ---------- 区块通用容器(首页所有 section 共用) ---------- */
+.story-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 区块间统一垂直间距:相邻模块间距恒定 */
+  padding: var(--section-gap) 0;
+}
+
+/* steps↔pricing 与 pricing↔trust 间距拉近(仅这两处):#pricing 上下 padding 减半,#steps 取消底部 */
+#steps.story-section {
+  padding-bottom: 0;
+}
+#pricing.story-section {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.story-inner {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, calc(100% - 80px));
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* 区块间距统一:由 .story-section / .faq / .download / .trust-dark 的 padding: var(--section-gap) 0 控制 */
+
+/* 确保导航跳转时区块完整展示 + 价格等大 */
+#answer .story-inner { min-height: 75vh; }
+#pricing .story-inner { min-height: 80vh; }

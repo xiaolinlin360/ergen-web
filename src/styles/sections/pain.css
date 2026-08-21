@@ -1,0 +1,145 @@
+/* ================================================================
+   pain.css —— 痛点共鸣区(PainSection + PainSplit)
+   ================================================================ */
+
+/* 痛点副标题(在 title 下方) */
+.story-pain-sub {
+  margin: 20px auto 0;
+  text-align: center;
+  color: #000;
+  font-size: var(--fs-lede);
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+/* 痛点标题(复用 .story-pain-title,在 PainSection 内置) */
+.story-pain-title {
+  margin: 24px 0 0;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: var(--fs-h2);
+  font-weight: 680;
+  line-height: 1.08;
+  letter-spacing: 0;
+  text-align: center !important;
+  white-space: nowrap;
+}
+
+
+/* ── PainSplit：左图右文 ── */
+.pain-split {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 20px;
+  align-items: center;
+  max-width: 1180px;
+  margin: 20px auto 0;
+  min-height: 480px;
+}
+
+/* 左侧截图区 */
+.pain-split-stage {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 16px 52px rgba(43, 31, 20, 0.1);
+  aspect-ratio: 16 / 10;
+  background: #e8e4db;
+}
+
+.pain-split-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.45s var(--ease-out),
+    transform 0.45s var(--ease-out);
+}
+
+.pain-split-slide.is-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pain-split-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 右侧文本行 */
+.pain-split-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pain-split-row {
+  position: relative;
+  padding: 24px 28px;
+  border-radius: 16px;
+  cursor: default;
+  transition: background 0.2s var(--ease-std);
+}
+
+.pain-split-row:hover {
+  background: rgba(5, 150, 105, 0.04);
+}
+
+.pain-split-row.is-active {
+  background: rgba(5, 150, 105, 0.08);
+}
+
+.pain-split-kw {
+  display: block;
+  font-size: clamp(32px, 3.2vw, 48px);
+  font-weight: 680;
+  color: var(--ink-cream);
+  cursor: pointer;
+  transition: color 0.2s var(--ease-std);
+}
+
+/* 描述：默认隐藏，hover 向下滑出 */
+.pain-split-desc {
+  display: block;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-8px);
+  font-size: var(--fs-lede);
+  color: #000;
+  font-weight: 400;
+  line-height: 1.55;
+  padding-top: 0;
+  transition:
+    max-height 0.35s var(--ease-out),
+    opacity 0.3s var(--ease-out),
+    transform 0.3s var(--ease-out),
+    padding-top 0.3s var(--ease-out);
+}
+
+.pain-split-row:hover .pain-split-desc,
+.pain-split-row.is-active .pain-split-desc {
+  max-height: 72px;
+  opacity: 1;
+  transform: translateY(0);
+  padding-top: 20px;
+}
+
+/* ── 响应式 ── */
+@media (max-width: 760px) {
+  .story-pain-title {
+    font-size: clamp(30px, 8vw, 42px);
+    white-space: normal;
+  }
+
+  .pain-split {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .pain-split-stage {
+    aspect-ratio: 4 / 3;
+  }
+}
