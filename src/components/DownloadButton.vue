@@ -9,7 +9,7 @@
     >
       <img
         v-if="platform === 'ios' || platform === 'mac'"
-        src="/images/icon-apple.svg"
+        :src="appleIcon"
         alt=""
         class="hero-dl-icon"
       />
@@ -27,7 +27,7 @@
       </svg>
       <img
         v-else-if="platform === 'windows'"
-        src="/images/icon-win.svg"
+        :src="winIcon"
         alt=""
         class="hero-dl-icon"
       />
@@ -43,6 +43,10 @@
 <script setup>
 import { computed } from 'vue'
 import { DOWNLOAD_URLS, DOWNLOAD_QR_IMAGE } from '@/constants/download'
+
+/** 平台图标路径（跟随 Vite base，支持子路径部署） */
+const appleIcon = `${import.meta.env.BASE_URL}images/icon-apple.svg`
+const winIcon = `${import.meta.env.BASE_URL}images/icon-win.svg`
 
 const props = defineProps({
   platform: {

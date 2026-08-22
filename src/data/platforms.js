@@ -10,8 +10,8 @@ import { IMAGES } from './images'
 
 /** @type {DownloadPlatform[]} */
 export const downloadPlatforms = [
-  { img: '/images/icon-win.svg', label: 'Windows', dl: '点击下载 Windows 版' },
-  { img: '/images/icon-apple.svg', label: 'Mac OS', dl: '点击下载 Mac 版' },
-  { img: '/images/icon-phone.svg', label: '手机', qr: IMAGES.qrcodeDl },
-  { img: '/images/icon-tablet.svg', label: '平板', qr: IMAGES.qrcodeDl },
+  { img: `${import.meta.env.BASE_URL}images/icon-win.svg`, label: 'Windows', dl: '点击下载 Windows 版' },
+  { img: `${import.meta.env.BASE_URL}images/icon-apple.svg`, label: 'Mac OS', dl: '点击下载 Mac 版' },
+  { img: `${import.meta.env.BASE_URL}images/icon-phone.svg`, label: '手机', qr: IMAGES.qrcodeDl },
+  { img: `${import.meta.env.BASE_URL}images/icon-tablet.svg`, label: '平板', qr: IMAGES.qrcodeDl },
 ]

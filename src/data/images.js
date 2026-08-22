@@ -4,10 +4,10 @@
  */
 export const IMAGES = {
   /** 对话截图（Hero 三张扇形 + Steps 三步示意，复用同一组） */
-  dialog1: '/images/dialog-1.webp',
-  dialog2: '/images/dialog-2.webp',
-  dialog3: '/images/dialog-3.webp',
+  dialog1: `${import.meta.env.BASE_URL}images/dialog-1.webp`,
+  dialog2: `${import.meta.env.BASE_URL}images/dialog-2.webp`,
+  dialog3: `${import.meta.env.BASE_URL}images/dialog-3.webp`,
   /** 二维码 */
-  qrcode: '/images/qrcode.webp',
-  qrcodeDl: '/images/qrcode-dl.webp',
+  qrcode: `${import.meta.env.BASE_URL}images/qrcode.webp`,
+  qrcodeDl: `${import.meta.env.BASE_URL}images/qrcode-dl.webp`,
 }

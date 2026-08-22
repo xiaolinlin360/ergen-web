@@ -16,4 +16,4 @@ export const DOWNLOAD_URLS = {
 }
 
 /** 二维码图片路径（hover 弹层用） */
-export const DOWNLOAD_QR_IMAGE = '/images/qrcode.webp'
+export const DOWNLOAD_QR_IMAGE = `${import.meta.env.BASE_URL}images/qrcode.webp`
