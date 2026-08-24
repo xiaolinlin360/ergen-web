@@ -3,7 +3,7 @@
     <div class="story-inner story-answer-inner" aria-label="食材溯源">
       <div class="ingredient-head">
         <RevealOnScroll variant="fadeIn" :amount="0.1">
-          <h2 style="color: #000000">你吃的每一口，都有来处</h2>
+          <h2>你吃的每一口，都有来处</h2>
           <p>每一份食材标明产地、供应商，来源透明。</p>
         </RevealOnScroll>
       </div>

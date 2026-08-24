@@ -6,10 +6,7 @@
 
 - **Vue 3.5** + **Vite 8**（`<script setup>` 为主）
 - **Vue Router 5**（嵌套路由，DefaultLayout 作父路由）
-- **Pinia 3**（含持久化插件，当前无业务 store）
-- **Supabase JS**（客户端已初始化，暂未接入业务）
-- **Element Plus 2.14**（已全局注册，当前业务未使用组件）
-- **SCSS**（仅全局基础样式）
+- 纯 CSS（设计令牌 + 按 section 拆分），无预处理器
 - 纯 JavaScript，无 TypeScript
 
 ## 环境要求
@@ -29,18 +26,12 @@ pnpm format    # Prettier 格式化
 
 ## 环境变量
 
-`.env`（已 gitignore，需自行创建）：
-
-```
-VITE_SUPABASE_URL=<your-supabase-url>
-VITE_SUPABASE_ANON_KEY=<your-supabase-anon-key>
-```
+当前无业务用到的环境变量。
 
 ## 目录结构
 
 ```
 src
-├── assets/             # 静态资源（main.scss 全局基础样式）
 ├── components/
 │   ├── sections/       # 页面区块组件（Hero/Pain/Answer/Steps/Pricing/Trust/Faq/Download + PainSplit）
 │   ├── CountUp.vue          # 数字滚动动画
@@ -65,13 +56,10 @@ src
 │   └── LegalPage.vue        # 通用法律页（6 条路由复用，v-html 注入正文）
 ├── router/
 │   └── index.js             # 嵌套路由：/ + /company + 6 条法律页路由
-├── stores/              # Pinia（当前无业务 store）
 ├── styles/              # 全站样式（按模块拆分）
 │   ├── tokens.css           # :root 设计变量
 │   ├── base.css             # reset + 全局壳层
 │   └── sections/            # 各区块样式（nav/hero/pain/answer/steps/pricing/trust/faq/download/footer/legal）
-├── utils/
-│   └── supabase.js          # Supabase 客户端初始化
 ├── App.vue              # 根组件（裸 router-view）
 └── main.js              # 入口（挂载插件 + 按序 import 样式）
 ```

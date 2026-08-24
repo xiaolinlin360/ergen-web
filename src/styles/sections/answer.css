@@ -26,14 +26,14 @@
   letter-spacing: 0;
   text-align: center;
   font-family: var(--font-sans);
-  color: #ffffff;
+  color: var(--ink-cream);
   white-space: nowrap;
 }
 
 .ingredient-head p {
   max-width: 680px;
   margin: 20px auto 0;
-  color: #000;
+  color: var(--ink-cream);
   font-size: var(--fs-lede);
   line-height: 1.85;
   font-weight: 400;
@@ -100,7 +100,7 @@
   margin: 0;
   font-size: 30px;
   font-weight: 700;
-  color: #000;
+  color: var(--ink-cream);
   letter-spacing: 0.01em;
 }
 
@@ -122,7 +122,7 @@
   font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.06em;
-  color: #000000;
+  color: var(--ink-cream);
   margin-bottom: 14px;
 }
 

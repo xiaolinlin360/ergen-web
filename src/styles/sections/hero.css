@@ -110,14 +110,16 @@
   text-align: left;
 }
 
-/* 朴素标题，两行，无动画 */
+/* 朴素标题，两行，无动画
+   数值原为组件内联 titleStyle（fs-h1 / 1.04 / -0.01em），收敛回 CSS 保持视觉一致 */
 .hotchain-title--plain {
   margin: 0 0 20px !important;
-  font-size: var(--fs-h2);
+  font-family: var(--font-sans);
+  font-size: var(--fs-h1);
   font-weight: 700;
   color: var(--ink-cream);
-  line-height: 1.2;
-  letter-spacing: 0;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
   text-align: left;
   white-space: nowrap;
 }

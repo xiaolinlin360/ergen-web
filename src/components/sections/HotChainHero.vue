@@ -15,10 +15,7 @@
       >
         <!-- 标题+描述 -->
         <div class="hotchain-hero-text">
-          <h1
-            class="hotchain-title hotchain-title--plain"
-            :style="titleStyle"
-          >
+          <h1 class="hotchain-title hotchain-title--plain">
             你的身体数据，决定你每一餐
           </h1>
           <p class="hotchain-desc hotchain-desc--wide">
@@ -49,12 +46,4 @@
 import RevealOnScroll from '@/components/RevealOnScroll.vue'
 import DownloadButton from '@/components/DownloadButton.vue'
 import { IMAGES } from '@/data/images'
-
-const titleStyle = {
-  fontFamily: 'var(--font-sans)',
-  fontSize: 'var(--fs-h1)',
-  fontWeight: 700,
-  lineHeight: 1.04,
-  letterSpacing: '-0.01em',
-}
 </script>
