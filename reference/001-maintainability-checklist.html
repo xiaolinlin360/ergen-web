@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>速查 · 可维护性自查清单</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<main class="page">
+
+  <p class="kicker">参考文档 · 配套第 1 课</p>
+  <h1>可维护性自查清单</h1>
+  <p class="subtitle">拿这份清单去扫你的代码。打印出来，改代码前对一遍。</p>
+
+  <h2>三问识别"单一事实来源"被破坏</h2>
+  <p>对代码里任何一个"东西"（一个数字、一段文案、一条颜色、一个尺寸、一条规则）问三句话：</p>
+  <ol>
+    <li><strong>它出现了几次？</strong>搜索一下，两次以上就是危险信号。</li>
+    <li><strong>改它要记得去改几个文件？</strong>需要"同时记住多处"的地方，迟早漏改。</li>
+    <li><strong>这些地方各写各的，会不会不一致？</strong>用 <code>!important</code> 打架、两处文案措辞不同 = 已发病。</li>
+  </ol>
+  <div class="tip"><span class="label">核心</span>一个"事实"只在代码里出现一次。要改，只改那一处，别处自动生效。</div>
+
+  <h2>全站扫描清单（按顺序过一遍）</h2>
+  <table>
+    <tr><th>扫哪里</th><th>看什么</th><th>健康信号</th></tr>
+    <tr><td>组件模板</td><td>有没有大段 <code>:style="..."</code> 内联样式</td><td>样式只在 CSS 里</td></tr>
+    <tr><td>全局 CSS / scoped CSS</td><td>同一套样式是否散在多个文件</td><td>每 section 一个文件</td></tr>
+    <tr><td>颜色 / 尺寸 / 圆角</td><td>是否硬编码 hex、写死 px</td><td>全用 <code>var(--token)</code></td></tr>
+    <tr><td>数据文件</td><td>同一段文案 / 同一组配置是否出现两次</td><td>一个数据源，多处 import</td></tr>
+    <tr><td>配置文件</td><td>README 描述 vs package.json 实际</td><td>文档即现实</td></tr>
+    <tr><td>代码里</td><td>有无死代码、脚手架残留、<code>eslint-disable</code> 但没装 lint</td><td>无残留、护栏真实生效</td></tr>
+  </table>
+
+  <h2>优先修什么（性价比排序）</h2>
+  <ol>
+    <li>会"改一处漏一处"的重复数据源 —— 最容易被你本人踩坑。</li>
+    <li>内联样式里写死的颜色/尺寸 —— 绕过 token，改主题时漏网。</li>
+    <li>README 与现实的漂移 —— 新人/未来的你都会被带偏。</li>
+    <li>没有自动化护栏 —— 重构全靠手感。</li>
+  </ol>
+
+  <h2>词汇表</h2>
+
+  <p><strong>单一事实来源（Single Source of Truth）</strong>：<br>
+  一个事实只定义一次，其它地方引用它。改这一处，处处生效。<br>
+  <em>避免</em>：多处硬编码、重复数据源</p>
+
+  <p><strong>内联样式（inline style）</strong>：<br>
+  写在模板标签上的 <code>:style="{...}"</code>。无法用伪类/媒体查询，难以复用，且会把规则拆散到各处。<br>
+  <em>避免</em>：把布局/颜色/尺寸写成内联对象</p>
+
+  <p><strong>Design Token（设计令牌）</strong>：<br>
+  集中定义的 CSS 变量（如 <code>--mint</code>、<code>--r-2xl</code>）。全站只改一处即可换主题。<br>
+  <em>在本仓库</em>：<code>src/styles/tokens.css</code></p>
+
+  <p><strong>Scoped CSS</strong>：<br>
+  SFC 里 <code>&lt;style scoped&gt;</code> 的样式只作用于本组件。反模式是"全局类名全靠约定不报错"。<br>
+  <em>本仓库现状</em>：全局 section CSS + 少量 scoped + 大量内联，三套并行</p>
+
+  <p><strong>Composable</strong>：<br>
+  把可复用逻辑抽成函数（如 <code>useInView</code>），一个逻辑只写一次。<br>
+  <em>避免</em>：每个组件各写一份 IntersectionObserver</p>
+
+  <p><strong>!important</strong>：<br>
+  强制覆盖其它规则。一旦用得多，就说明样式在互相打架（通常是内联样式 vs CSS 文件）。<br>
+  <em>避免</em>：用它来"镇压"内联样式</p>
+
+  <p><strong>自动化护栏（guardrails）</strong>：<br>
+  lint、类型检查、构建检查、测试。让"改坏了"在提交前被抓住，而不是上线后才发现。<br>
+  <em>本仓库现状</em>：无 ESLint、无类型检查、无测试</p>
+
+  <p><strong>脚手架残留（scaffolding leftovers）</strong>：<br>
+  初始化模板留下的死代码（如 <code>assets/main.scss</code> 只剩一条被覆盖的 body 规则），及随之而来的无用依赖。<br>
+  <em>避免</em>：为"也许以后用得上"保留死代码</p>
+
+  <hr class="rule">
+  <p class="cite">本清单配套第 1 课：<a href="../lessons/0001-single-source-of-truth.html">单一事实来源：一个东西，只在一个地方定义</a>。对任何术语有疑问，直接问我。</p>
+
+</main>
+</body>
+</html>

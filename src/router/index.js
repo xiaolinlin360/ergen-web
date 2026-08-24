@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import HomePage from '@/pages/HomePage.vue'
 import Company from '@/pages/Company.vue'
@@ -6,7 +6,7 @@ import LegalPage from '@/pages/LegalPage.vue'
 import { changelog, help, service, copyright, privacy, terms } from '@/data/legal'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
 
   routes: [
     {
