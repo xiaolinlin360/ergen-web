@@ -126,6 +126,22 @@
   margin: 8px 0 12px;
 }
 
+/* 正文里的辅助说明文字（原内联 color:#77675a; font-size:14px 收敛至此） */
+.legal-body .legal-note {
+  color: #77675a;
+  font-size: 14px;
+}
+
+/* 相关协议互引（隐私政策/用户协议末尾） */
+.legal-body .legal-note--spaced {
+  margin-top: 1.5em;
+}
+
+/* 帮助中心底部"联系客服"链接 */
+.legal-body .legal-mailto {
+  margin-top: 36px;
+}
+
 /* 帮助中心的手风琴 */
 .legal-body details {
   border-bottom: 1px solid rgba(43, 31, 20, 0.1);
@@ -150,6 +166,17 @@
   border-radius: 12px;
   padding: 16px 20px;
   margin-top: 12px;
+}
+
+/* 邮箱卡片内的两行：第一行贴顶，第二行是灰色小字提示（原内联样式收敛至此） */
+.legal-body .mail p {
+  margin: 0;
+}
+
+.legal-body .mail p + p {
+  margin: 8px 0 0;
+  color: #93857a;
+  font-size: 13px;
 }
 
 /* —— pandoc 族：隐私政策/用户协议的表格 —— */

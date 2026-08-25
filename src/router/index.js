@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import HomePage from '@/pages/HomePage.vue'
-import Company from '@/pages/Company.vue'
+import CompanyPage from '@/pages/CompanyPage.vue'
 import LegalPage from '@/pages/LegalPage.vue'
 import { changelog, help, service, copyright, privacy, terms } from '@/data/legal'
 
@@ -14,7 +14,7 @@ const router = createRouter({
       component: DefaultLayout,
       children: [
         { path: '', name: 'home', component: HomePage },
-        { path: 'company', name: 'company', component: Company },
+        { path: 'company', name: 'company', component: CompanyPage },
         { path: 'changelog', name: 'changelog', component: LegalPage, props: { doc: changelog } },
         { path: 'help', name: 'help', component: LegalPage, props: { doc: help } },
         { path: 'service', name: 'service', component: LegalPage, props: { doc: service } },
