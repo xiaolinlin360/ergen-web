@@ -27,9 +27,8 @@
               </div>
             </div>
             <div class="price-card-features">
-              <p class="price-card-feat-lead">每份餐均含：</p>
-              <p>✓ AI 定制餐单</p>
-              <p>✓ 热链配送到手</p>
+              <p class="price-card-feat-lead">{{ plan.featureTitle }}</p>
+             <p v-for="(feature, idx) in plan.features" :key="idx">✓ {{ feature }}</p>
             </div>
             <DownloadButton
               :platform="plan.platform || 'android'"
