@@ -1,73 +1,249 @@
 /* ================================================================
-   nav.css —— 首页副导航栏(SubNav / DownloadButton nav variant)
+   nav.css —— 首页全宽固定顶栏(SiteNav / DownloadButton nav variant)
+   布局:左 logo / 中导航链接 / 右 CTA,移动端收进汉堡菜单。
    ================================================================ */
 
-/* 首页导航:fixed 浮在页面上方,不占文档流,贯穿全页 */
-.sub-nav {
+.site-nav {
   position: fixed;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%) translateY(-100%);
+  left: 0;
+  right: 0;
   z-index: 39;
-  padding: 10px 0;
-  pointer-events: none;
-  transition: transform 0.4s var(--ease-out);
+  background: rgba(255, 255, 255, 0.85);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  backdrop-filter: blur(20px) saturate(1.6);
+  border-bottom: 1px solid transparent;
+  transition:
+    background 0.3s var(--ease-std),
+    border-color 0.3s var(--ease-std),
+    box-shadow 0.3s var(--ease-std);
 }
 
-.sub-nav.is-visible {
-  transform: translateX(-50%) translateY(12px);
-  pointer-events: auto;
+.site-nav.is-scrolled {
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom-color: var(--ember-100);
+  box-shadow: 0 1px 2px rgba(43, 31, 20, 0.06);
 }
 
-.sub-nav-inner {
+.site-nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: min(1700px, calc(100% - 80px));
+  height: 72px;
+  margin: 0 auto;
+}
+
+/* ── 左侧 logo ── */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.logo-icon {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11px;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.28);
+}
+
+.logo-icon img {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+}
+
+.logo-text {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--ink-cream);
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+}
+
+.logo-text em {
+  font-style: normal;
+  font-size: 15px;
+  font-weight: 650;
+  color: var(--ember-ink);
+  margin-left: 4px;
+  letter-spacing: 0.02em;
+}
+
+/* ── 中间导航链接 ── */
+.nav-links {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 10px;
-  background: linear-gradient(120deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.28));
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  border-radius: 16px;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.85),
-    0 8px 32px rgba(43, 31, 20, 0.1);
-  -webkit-backdrop-filter: blur(24px) saturate(1.8);
-  backdrop-filter: blur(24px) saturate(1.8);
 }
 
-.sub-nav-inner a {
+.nav-links a {
   display: inline-flex;
   align-items: center;
-  padding: 8px 18px;
-  color: #4b5563;
+  padding: 8px 16px;
+  color: var(--ink-body);
   font-size: 15px;
-  font-weight: 590;
-  text-decoration: none;
-  border-radius: 16px;
+  font-weight: 550;
+  border-radius: var(--r-sm);
   white-space: nowrap;
-  transition: background 0.15s var(--ease-std), color 0.15s var(--ease-std);
+  transition:
+    background 0.15s var(--ease-std),
+    color 0.15s var(--ease-std);
 }
 
-.sub-nav-inner a:hover {
-  background: rgba(5, 150, 105, 0.08);
+.nav-links a:hover {
   color: var(--ember-ink);
+  background: rgba(5, 150, 105, 0.08);
 }
 
-.sub-nav-inner a.is-active {
+.nav-links a.is-active {
+  color: var(--ember-ink);
   background: rgba(5, 150, 105, 0.12);
-  color: var(--ink-cream);
   font-weight: 650;
 }
 
-/* DownloadButton 的 nav variant:副导航栏里的下载入口 */
-.sub-nav-inner .sub-nav-dl {
-  color: var(--ember-600);
-  display: inline-flex;
+/* ── 右侧 CTA:复用 DownloadButton nav variant ── */
+.nav-actions {
+  display: flex;
   align-items: center;
-  gap: 6px;
+  flex-shrink: 0;
 }
 
-.sub-nav-dl-icon {
-  width: 16px;
-  height: 16px;
-  filter: invert(56%) sepia(75%) saturate(820%) hue-rotate(100deg) brightness(92%) contrast(88%);
+/* DownloadButton 的 nav variant:顶栏里的渐变下载按钮 */
+.nav-actions .sub-nav-dl {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 650;
+  border-radius: var(--r-md);
+  background: linear-gradient(135deg, #6ee7b7 0%, #059669 100%);
+  box-shadow: 0 8px 20px rgba(5, 150, 105, 0.25);
+  transition:
+    transform 0.2s var(--ease-std),
+    box-shadow 0.2s var(--ease-std);
+}
+
+.nav-actions .sub-nav-dl:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(5, 150, 105, 0.35);
+}
+
+.nav-mobile-cta .sub-nav-dl {
+  justify-content: center;
+  width: 100%;
+  padding: 13px 22px;
+}
+
+/* ── 移动端汉堡按钮 ── */
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--r-sm);
+  transition: background 0.15s var(--ease-std);
+}
+
+.nav-burger:hover {
+  background: rgba(5, 150, 105, 0.08);
+}
+
+.nav-burger span {
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ink-cream);
+  transition:
+    transform 0.25s var(--ease-out),
+    opacity 0.25s var(--ease-out);
+}
+
+.nav-burger.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-burger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-burger.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ── 移动端展开面板 ── */
+.nav-mobile-panel {
+  display: none;
+}
+
+/* ── 响应式 ── */
+@media (max-width: 1024px) {
+  .site-nav-inner {
+    width: min(1700px, calc(100% - 40px));
+    height: 64px;
+  }
+
+  .nav-links,
+  .nav-actions {
+    display: none;
+  }
+
+  .nav-burger {
+    display: flex;
+  }
+
+  .nav-mobile-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px 20px 20px;
+    background: rgba(255, 255, 255, 0.97);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--ember-100);
+    box-shadow: 0 12px 32px rgba(43, 31, 20, 0.1);
+  }
+
+  .nav-mobile-panel a {
+    padding: 12px 16px;
+    color: var(--ink-body);
+    font-size: 16px;
+    font-weight: 550;
+    border-radius: var(--r-md);
+  }
+
+  .nav-mobile-panel a:hover,
+  .nav-mobile-panel a.is-active {
+    color: var(--ember-ink);
+    background: rgba(5, 150, 105, 0.1);
+  }
+
+  .nav-mobile-cta {
+    margin-top: 10px;
+  }
+}
+
+/* 面板展开/收起过渡 */
+.nav-menu-enter-active,
+.nav-menu-leave-active {
+  transition:
+    opacity 0.22s var(--ease-out),
+    transform 0.22s var(--ease-out);
+}
+
+.nav-menu-enter-from,
+.nav-menu-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
 }

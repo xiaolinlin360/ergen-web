@@ -90,7 +90,11 @@ img {
   width: clamp(340px, 38vw, 620px);
   left: -10%;
   top: 5%;
-  background: radial-gradient(circle at 35% 35%, rgba(110, 231, 183, 0.45), rgba(110, 231, 183, 0) 68%);
+  background: radial-gradient(
+    circle at 35% 35%,
+    rgba(110, 231, 183, 0.45),
+    rgba(110, 231, 183, 0) 68%
+  );
   animation: blob-drift-a 32s ease-in-out infinite alternate;
 }
 
@@ -98,7 +102,11 @@ img {
   width: clamp(280px, 30vw, 500px);
   right: -6%;
   top: 55%;
-  background: radial-gradient(circle at 60% 40%, rgba(167, 243, 208, 0.38), rgba(167, 243, 208, 0) 66%);
+  background: radial-gradient(
+    circle at 60% 40%,
+    rgba(167, 243, 208, 0.38),
+    rgba(167, 243, 208, 0) 66%
+  );
   animation: blob-drift-b 38s ease-in-out infinite alternate;
 }
 
@@ -106,7 +114,11 @@ img {
   width: clamp(240px, 26vw, 440px);
   left: 35%;
   top: 30%;
-  background: radial-gradient(circle at 50% 50%, rgba(209, 250, 229, 0.32), rgba(209, 250, 229, 0) 70%);
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(209, 250, 229, 0.32),
+    rgba(209, 250, 229, 0) 70%
+  );
   animation: blob-drift-c 28s ease-in-out infinite alternate;
 }
 
@@ -150,30 +162,69 @@ summary:focus-visible {
 /* ---------- RevealOnScroll 通用组件的入场动画 keyframes ----------
    组件本身用 inline style 控制触发,这些 keyframes 作为动画库储备。 */
 @keyframes reveal-fade {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 @keyframes reveal-rise {
-  from { opacity: 0; transform: translateY(48px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(48px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 @keyframes reveal-slide-in {
-  from { opacity: 0; transform: translateX(80px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 @keyframes reveal-scale-in {
-  from { opacity: 0; transform: scale(0.82); }
-  to   { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 @keyframes reveal-pop-up {
-  from { opacity: 0; transform: translateY(60px); }
-  65%  { opacity: 1; transform: translateY(-6px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  65% {
+    opacity: 1;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ---------- 全局排版呼吸感 ---------- */
-h2, h3 { text-wrap: balance; }
-p, .faq-a, .step-detail, .testimonial-text { text-wrap: pretty; }
+h2,
+h3 {
+  text-wrap: balance;
+}
+p,
+.faq-a,
+.step-detail,
+.testimonial-text {
+  text-wrap: pretty;
+}
 
 /* ---------- 区块锚点:导航跳转时完整展示 ---------- */
 #pain,
@@ -182,7 +233,7 @@ p, .faq-a, .step-detail, .testimonial-text { text-wrap: pretty; }
 #pricing,
 #trust,
 #faq {
-  scroll-margin-top: 70px;
+  scroll-margin-top: 84px;
 }
 
 /* ---------- 区块通用容器(首页所有 section 共用) ---------- */
@@ -214,5 +265,9 @@ p, .faq-a, .step-detail, .testimonial-text { text-wrap: pretty; }
 /* 区块间距统一:由 .story-section / .faq / .download / .trust-dark 的 padding: var(--section-gap) 0 控制 */
 
 /* 确保导航跳转时区块完整展示 + 价格等大 */
-#answer .story-inner { min-height: 75vh; }
-#pricing .story-inner { min-height: 80vh; }
+#answer .story-inner {
+  min-height: 75vh;
+}
+#pricing .story-inner {
+  min-height: 80vh;
+}
