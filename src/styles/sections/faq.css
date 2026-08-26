@@ -26,6 +26,10 @@
   position: relative;
 }
 
+.faq-grass {
+  height: 320px;
+}
+
 .faq-title {
   margin: 0;
   font-size: var(--fs-h2);

@@ -7,11 +7,7 @@
           <p class="faq-sub">
             <SplitText :stagger="0.012">关于配送、热量、效果，这里回答了你能想到的</SplitText>
           </p>
-          <img
-            src="D:\html的D盘\ergen官网\main\public\ic_launcher.svg"
-            style="height: 320px"
-            alt=""
-          />
+          <img class="faq-grass" src="/ic_launcher.svg" alt="" />
         </div>
         <ul class="faq-list">
           <RevealOnScroll
