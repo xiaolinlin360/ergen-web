@@ -12,6 +12,7 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
+  padding-top: 72px; /* 为固定导航(72px)让位,标题与导航保持呼吸距离 */
   /* 不自带背景,直接复用 .site-shell 的 fixed 渐变,确保与下一屏(story-pain)完全连续、无交界亮带 */
   background: transparent;
 }

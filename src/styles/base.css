@@ -226,14 +226,18 @@ p,
   text-wrap: pretty;
 }
 
-/* ---------- 区块锚点:导航跳转时完整展示 ---------- */
+/* ---------- 区块锚点:导航跳转后标题落在导航(72px)下方约 80px ----------
+   scroll-margin = 72 + 80 - 区块上 padding(#pricing 为 48,其余为 96) */
 #pain,
 #answer,
 #steps,
-#pricing,
 #trust,
 #faq {
-  scroll-margin-top: 84px;
+  scroll-margin-top: 56px;
+}
+
+#pricing {
+  scroll-margin-top: 104px;
 }
 
 /* ---------- 区块通用容器(首页所有 section 共用) ---------- */
